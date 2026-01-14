@@ -1,12 +1,10 @@
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
-import { useState } from "react";
 import Wrapper from "../wrappers/Navbar";
 import logo from "../images/logo.svg";
 import { useDashboardContext } from "../../pages/DashboardLayout";
-
+import LogoutContainer from "./LogoutContainer";
 const NavBar = () => {
   const { toggleSidebar } = useDashboardContext();
-  const [showLogout, setShowLogout] = useState(false);
 
   return (
     <Wrapper>
@@ -20,22 +18,7 @@ const NavBar = () => {
           </div>
           <h4 className="logo-text">Dashboard</h4>
         </div>
-        <div className="btn-container">
-          <button
-            type="button"
-            className="btn"
-            onClick={() => setShowLogout(!showLogout)}
-          >
-            <FaUserCircle />
-            John Doe
-            <FaCaretDown />
-          </button>
-          <div className={showLogout ? "dropdown show-dropdown" : "dropdown"}>
-            <button type="button" className="dropdown-btn">
-              Logout
-            </button>
-          </div>
-        </div>
+        <LogoutContainer />
       </div>
     </Wrapper>
   );
