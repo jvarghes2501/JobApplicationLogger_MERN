@@ -67,4 +67,4 @@ dist-ssr/
 
 # Uploads (if you have file uploads)
 uploads/
-public/uploads/
+public/uploads/ 
