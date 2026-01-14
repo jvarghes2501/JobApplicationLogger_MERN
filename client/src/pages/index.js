@@ -11,3 +11,4 @@ export { default as AllJobs } from "./AllJobs";
 export { default as DeleteJob } from "./DeleteJob";
 export { default as EditJob } from "./EditJob";
 export { default as ErrorPage } from "./Error";
+export { default as Admin } from "./Admin";
