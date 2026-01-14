@@ -13,7 +13,7 @@ const BigSideBar = () => {
   const { showSidebar } = useDashboardContext();
 
   const links = [
-    { id: 1, text: "Add Job", path: "add-job", icon: <MdAddBox /> },
+    { id: 1, text: "Add Job", path: ".", icon: <MdAddBox /> },
     { id: 2, text: "All Jobs", path: "all-jobs", icon: <MdWorkHistory /> },
     { id: 3, text: "Stats", path: "stats", icon: <MdQueryStats /> },
     { id: 4, text: "Profile", path: "profile", icon: <MdAdminPanelSettings /> },
