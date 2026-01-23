@@ -1,8 +1,13 @@
+import "express-async-errors";
 import express from "express";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
-
+import mongoose from "mongoose";
 import jobRouter from "./routes/jobRouter.js";
+import authRouter from "./routes/authRouter.js";
+import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+dotenv.config();
+
 const app = express();
 
 app.use(express.json());
@@ -12,18 +17,21 @@ if (process.env.NODE_ENV == "development") {
 }
 
 app.use("/api/v1/jobs", jobRouter);
-
+app.use("/api/v1/auth", authRouter);
 app.use("*", (req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: "Something went wrong!" });
-});
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5100;
 
-app.listen(port, () => {
-  console.log(`server running on port ${port}....`);
-});
+try {
+  await mongoose.connect(process.env.MONGO_URL);
+  app.listen(port, () => {
+    console.log(`server running on port ${port}....`);
+  });
+} catch (err) {
+  console.error("Failed to connect to MongoDB", err);
+  process.exit(1);
+}

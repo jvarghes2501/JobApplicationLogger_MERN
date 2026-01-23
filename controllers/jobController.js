@@ -1,59 +1,33 @@
-import { nanoid } from "nanoid";
-
-let jobs = [
-  { id: nanoid(), title: "Software Engineer", company: "Tech Corp" },
-  { id: nanoid(), title: "Data Scientist", company: "Data Inc" },
-  { id: nanoid(), title: "Product Manager", company: "Business Solutions" },
-];
-
+import Job from "../models/JobModel.js";
+import { StatusCodes } from "http-status-codes";
 export const getAllJobs = async (req, res) => {
-  res.status(200).json({ jobs });
+  const jobs = await Job.find({});
+  res.status(StatusCodes.OK).json({ jobs });
 };
 
 export const createJob = async (req, res) => {
   const { title, company } = req.body;
-  if (!title || !company) {
-    return res.status(400).json({ message: "Title and company are required" });
-  }
-  const newJob = { id: nanoid(), title, company };
-  jobs.push(newJob);
-  res.status(201).json({ message: "Job created", job: newJob });
+  const job = await Job.create({ title, company });
+  res.status(StatusCodes.CREATED).json({ job });
 };
 
 export const getJobById = async (req, res) => {
   const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ message: "Job not found" });
-  }
-  res.status(200).json({ job });
+  const job = await Job.findById(id);
+
+  res.status(StatusCodes.OK).json({ job });
 };
 
 export const editJobById = async (req, res) => {
   const { id } = req.params;
-  const { title, company } = req.body;
 
-  if (!title || !company) {
-    return res.status(400).json({ message: "Title and company are required" });
-  }
+  const updatedJob = await Job.findByIdAndUpdate(id, req.body, { new: true });
 
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ message: "Job not found" });
-  }
-
-  job.title = title;
-  job.company = company;
-  res.status(200).json({ message: "Job updated", job });
+  res.status(StatusCodes.OK).json({ message: "Job updated", job: updatedJob });
 };
 
-export const deleteJobById = (req, res) => {
+export const deleteJobById = async (req, res) => {
   const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ message: "Job not found" });
-  }
-  const newJobs = jobs.filter((job) => job.id !== id);
-  jobs = newJobs;
-  res.status(200).json({ message: "Job deleted" });
+  const job = await Job.findByIdAndDelete(id);
+  res.status(StatusCodes.OK).json({ message: "Job deleted", job });
 };
