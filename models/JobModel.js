@@ -15,5 +15,6 @@ const jobSchema = new mongoose.Schema({
   },
   jobLocation: String,
   createdDate: { type: Date, default: Date.now },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 export default mongoose.model("Job", jobSchema);
