@@ -1,10 +1,10 @@
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
 import { useState } from "react";
 import Wrapper from "../wrappers/LogoutContainer";
-//import { useDashboardContext } from "../../pages/DashboardLayout";
+import { useDashboardContext } from "../../pages/DashboardLayout";
 
 const LogoutContainer = () => {
-  //const { toggleSidebar } = useDashboardContext();
+  const { user, logoutUser } = useDashboardContext();
   const [showLogout, setShowLogout] = useState(false);
 
   return (
@@ -16,11 +16,11 @@ const LogoutContainer = () => {
           onClick={() => setShowLogout(!showLogout)}
         >
           <FaUserCircle />
-          John Doe
+          {user?.name || "User"}
           <FaCaretDown />
         </button>
         <div className={showLogout ? "dropdown show-dropdown" : "dropdown"}>
-          <button type="button" className="dropdown-btn">
+          <button type="button" className="dropdown-btn" onClick={logoutUser}>
             Logout
           </button>
         </div>

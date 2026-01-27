@@ -1,30 +1,33 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Form, redirect, useNavigation } from "react-router-dom";
 import Wrapper from "../assets/wrappers/RegisterAndLoginPage";
 import logo from "../assets/images/logo.svg";
+import customFetch from "../utils/customFetch";
+import { toast } from "react-toastify";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await customFetch.post("/auth/login", data);
+    toast.success("Login successful!");
+    return redirect("/dashboard");
+  } catch (err) {
+    toast.error(err.response?.data?.message || "Login failed");
+  }
+  return null;
+};
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login data:", formData);
-    // Handle login logic here
-  };
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
   return (
     <Wrapper>
-      <form className="form" onSubmit={handleSubmit}>
+      <Form className="form" method="post">
         <img src={logo} alt="JobLogger" className="logo" />
         <h4>Welcome Back</h4>
-        
+
         <div className="form-row">
           <label htmlFor="email" className="form-label">
             Email Address
@@ -34,8 +37,6 @@ const Login = () => {
             id="email"
             name="email"
             className="form-input"
-            value={formData.email}
-            onChange={handleChange}
             required
             placeholder="your.email@example.com"
           />
@@ -50,15 +51,13 @@ const Login = () => {
             id="password"
             name="password"
             className="form-input"
-            value={formData.password}
-            onChange={handleChange}
             required
             placeholder="Enter your password"
           />
         </div>
 
-        <button type="submit" className="btn btn-block">
-          Sign In
+        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+          {isSubmitting ? "Logging in..." : "Sign In"}
         </button>
 
         <p>
@@ -67,7 +66,7 @@ const Login = () => {
             Create Account
           </Link>
         </p>
-      </form>
+      </Form>
     </Wrapper>
   );
 };

@@ -12,6 +12,10 @@ import {
   Profile,
   Admin,
 } from "./pages";
+
+import { action as registerAction } from "./pages/Register.jsx";
+import { action as loginAction } from "./pages/Login.jsx";
+import { loader as dashboardLoader } from "./pages/DashboardLayout.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,14 +30,17 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+        action: registerAction,
       },
       {
         path: "login",
         element: <Login />,
+        action: loginAction,
       },
       {
         path: "dashboard",
         element: <DashboardLayout />,
+        loader: dashboardLoader,
         children: [
           {
             index: true,
