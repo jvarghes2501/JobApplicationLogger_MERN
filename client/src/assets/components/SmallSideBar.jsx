@@ -6,19 +6,29 @@ import {
   MdWorkHistory,
   MdAdminPanelSettings,
 } from "react-icons/md";
+import { ImProfile } from "react-icons/im";
 import Wrapper from "../wrappers/SmallSidebar";
 import logo from "../images/logo.svg";
 import { useDashboardContext } from "../../pages/DashboardLayout";
 
 const SmallSideBar = () => {
-  const { showSidebar, toggleSidebar } = useDashboardContext();
+  const { showSidebar, toggleSidebar, user } = useDashboardContext();
 
   const links = [
     { id: 1, text: "Add Job", path: ".", icon: <MdAddBox /> },
     { id: 2, text: "All Jobs", path: "all-jobs", icon: <MdWorkHistory /> },
     { id: 3, text: "Stats", path: "stats", icon: <MdQueryStats /> },
-    { id: 4, text: "Profile", path: "profile", icon: <MdAdminPanelSettings /> },
+    { id: 4, text: "Profile", path: "profile", icon: <ImProfile /> },
   ];
+
+  if (user.role === "admin") {
+    links.push({
+      id: 5,
+      text: "Admin",
+      path: "admin",
+      icon: <MdAdminPanelSettings />,
+    });
+  }
 
   return (
     <Wrapper>

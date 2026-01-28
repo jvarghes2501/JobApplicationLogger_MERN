@@ -23,7 +23,7 @@ import {
   loader as editJobLoader,
   action as editJobAction,
 } from "./pages/EditJob.jsx";
-
+import { loader as adminLoader } from "./pages/Admin.jsx";
 import { action as deleteJobAction } from "./pages/DeleteJob.jsx";
 const router = createBrowserRouter([
   {
@@ -72,6 +72,7 @@ const router = createBrowserRouter([
           {
             path: "admin",
             element: <Admin />,
+            loader: adminLoader,
           },
           {
             path: "edit-job/:id",
