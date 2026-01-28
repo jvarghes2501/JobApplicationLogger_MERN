@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.article`
   background: var(--background-secondary-color);
@@ -60,6 +60,23 @@ const Wrapper = styled.article`
     height: 30px;
     display: grid;
     align-items: center;
+    font-weight: 500;
+  }
+  .status.interview {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+  .status.applied {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  .status.offer {
+    background: #dcfce7;
+    color: #166534;
+  }
+  .status.rejected {
+    background: #fee2e2;
+    color: #991b1b;
   }
   .actions {
     margin-top: 1rem;
