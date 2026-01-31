@@ -1,6 +1,7 @@
 import Job from "../models/JobModel.js";
 import { StatusCodes } from "http-status-codes";
-
+import mongoose from "mongoose";
+import dayjs from "dayjs";
 export const getAllJobs = async (req, res) => {
   const { search, jobStatus, jobType, sort } = req.query;
 
@@ -62,4 +63,63 @@ export const deleteJobById = async (req, res) => {
   const { id } = req.params;
   const job = await Job.findByIdAndDelete(id);
   res.status(StatusCodes.OK).json({ message: "Job deleted", job });
+};
+
+export const showStats = async (req, res) => {
+  try {
+    let stats = await Job.aggregate([
+      { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
+      { $group: { _id: "$jobStatus", count: { $sum: 1 } } },
+    ]);
+
+    stats = stats.reduce((acc, curr) => {
+      const { _id: title, count } = curr;
+      acc[title] = count;
+      return acc;
+    }, {});
+
+    const defaultStats = {
+      applied: stats.applied || 0,
+      interview: stats.interview || 0,
+      offer: stats.offer || 0,
+      rejected: stats.rejected || 0,
+    };
+
+    // Monthly applications for last 6 months
+    let monthlyApplications = await Job.aggregate([
+      { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdDate" },
+            month: { $month: "$createdDate" },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { "_id.year": -1, "_id.month": -1 } },
+      { $limit: 6 },
+    ]);
+
+    monthlyApplications = monthlyApplications
+      .map((item) => {
+        const {
+          _id: { year, month },
+          count,
+        } = item;
+        const date = dayjs()
+          .month(month - 1)
+          .year(year)
+          .format("MMM YYYY");
+        return { date, count };
+      })
+      .reverse();
+
+    res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
+  } catch (error) {
+    console.error("Error in showStats:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ msg: "Error fetching stats", error: error.message });
+  }
 };

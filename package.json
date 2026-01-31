@@ -12,7 +12,8 @@
     "server": "nodemon server.js",
     "client": "cd client && npm run dev",
     "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
-    "watch": "node --watch server.js"
+    "watch": "node --watch server.js",
+    "populate": "node populateDB.js"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",

@@ -5,6 +5,7 @@ import {
   getJobById,
   editJobById,
   deleteJobById,
+  showStats,
 } from "../controllers/jobController.js";
 
 import {
@@ -13,7 +14,9 @@ import {
 } from "../middleware/validationMiddleware.js";
 const router = Router();
 
+router.route("/stats").get(showStats);
 router.route("/").get(getAllJobs).post(validateJobInput, createJob);
+
 router
   .route("/:id")
   .get(validateIdParam, getJobById)
