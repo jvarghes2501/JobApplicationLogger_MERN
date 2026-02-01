@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background elements -->
+  <rect width="800" height="600" fill="url(#gradient1)"/>
+  
+  <!-- Floating documents/applications -->
+  <g opacity="0.6">
+    <rect x="580" y="80" width="140" height="180" rx="8" fill="white" stroke="#667eea" stroke-width="2"/>
+    <rect x="595" y="100" width="110" height="8" rx="4" fill="#667eea" opacity="0.3"/>
+    <rect x="595" y="120" width="90" height="8" rx="4" fill="#667eea" opacity="0.3"/>
+    <rect x="595" y="140" width="110" height="8" rx="4" fill="#667eea" opacity="0.3"/>
+    <circle cx="605" cy="180" r="5" fill="#4ade80"/>
+    <text x="615" y="185" font-family="Arial" font-size="12" fill="#333">Applied</text>
+  </g>
+  
+  <g opacity="0.6">
+    <rect x="60" y="120" width="140" height="180" rx="8" fill="white" stroke="#764ba2" stroke-width="2"/>
+    <rect x="75" y="140" width="110" height="8" rx="4" fill="#764ba2" opacity="0.3"/>
+    <rect x="75" y="160" width="90" height="8" rx="4" fill="#764ba2" opacity="0.3"/>
+    <rect x="75" y="180" width="110" height="8" rx="4" fill="#764ba2" opacity="0.3"/>
+    <circle cx="85" cy="220" r="5" fill="#ffd700"/>
+    <text x="95" y="225" font-family="Arial" font-size="12" fill="#333">Pending</text>
+  </g>
+  
+  <!-- Main clipboard with checklist -->
+  <g transform="translate(280, 120)">
+    <!-- Clipboard -->
+    <rect x="0" y="20" width="240" height="340" rx="12" fill="white" stroke="#667eea" stroke-width="3"/>
+    <rect x="80" y="0" width="80" height="35" rx="8" fill="#667eea"/>
+    
+    <!-- Checklist items -->
+    <g transform="translate(20, 60)">
+      <!-- Item 1 - Checked -->
+      <circle cx="15" cy="15" r="12" fill="url(#accentGrad)"/>
+      <path d="M 10 15 L 13 18 L 20 11" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="40" y="8" width="160" height="14" rx="7" fill="#e5e7eb"/>
+      <text x="45" y="20" font-family="Arial" font-size="14" fill="#6b7280" text-decoration="line-through">Update Resume</text>
+      
+      <!-- Item 2 - Checked -->
+      <circle cx="15" cy="60" r="12" fill="url(#accentGrad)"/>
+      <path d="M 10 60 L 13 63 L 20 56" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="40" y="53" width="160" height="14" rx="7" fill="#e5e7eb"/>
+      <text x="45" y="65" font-family="Arial" font-size="14" fill="#6b7280" text-decoration="line-through">Apply to Google</text>
+      
+      <!-- Item 3 - Checked -->
+      <circle cx="15" cy="105" r="12" fill="url(#accentGrad)"/>
+      <path d="M 10 105 L 13 108 L 20 101" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="40" y="98" width="160" height="14" rx="7" fill="#e5e7eb"/>
+      <text x="45" y="110" font-family="Arial" font-size="14" fill="#6b7280" text-decoration="line-through">Schedule Interview</text>
+      
+      <!-- Item 4 - In progress -->
+      <circle cx="15" cy="150" r="12" fill="white" stroke="url(#gradient2)" stroke-width="2.5"/>
+      <rect x="40" y="143" width="160" height="14" rx="7" fill="#f3f4f6"/>
+      <text x="45" y="155" font-family="Arial" font-size="14" fill="#374151">Follow up email</text>
+      
+      <!-- Item 5 - Todo -->
+      <circle cx="15" cy="195" r="12" fill="white" stroke="#d1d5db" stroke-width="2.5"/>
+      <rect x="40" y="188" width="160" height="14" rx="7" fill="#f9fafb"/>
+      <text x="45" y="200" font-family="Arial" font-size="14" fill="#9ca3af">Prepare presentation</text>
+      
+      <!-- Item 6 - Todo -->
+      <circle cx="15" cy="240" r="12" fill="white" stroke="#d1d5db" stroke-width="2.5"/>
+      <rect x="40" y="233" width="160" height="14" rx="7" fill="#f9fafb"/>
+      <text x="45" y="245" font-family="Arial" font-size="14" fill="#9ca3af">Network on LinkedIn</text>
+    </g>
+  </g>
+  
+  <!-- Person figure -->
+  <g transform="translate(100, 320)">
+    <!-- Head -->
+    <circle cx="40" cy="35" r="28" fill="#ffb8b8"/>
+    <!-- Hair -->
+    <path d="M 15 30 Q 10 15 25 10 Q 40 5 55 10 Q 70 15 65 30 Q 65 20 55 18 Q 45 16 40 18 Q 35 16 25 18 Q 15 20 15 30" fill="#2f2e41"/>
+    
+    <!-- Body -->
+    <path d="M 20 65 L 10 140 L 30 140 L 35 90 L 45 90 L 50 140 L 70 140 L 60 65 Z" fill="url(#gradient2)"/>
+    <ellipse cx="40" cy="65" rx="25" ry="32" fill="url(#gradient2)"/>
+    
+    <!-- Arms -->
+    <path d="M 15 75 L -5 115 L 5 120 L 20 85" fill="#ffb8b8"/>
+    <path d="M 65 75 L 85 95 L 80 105 L 60 85" fill="#ffb8b8"/>
+    
+    <!-- Holding briefcase -->
+    <rect x="75" y="95" width="45" height="35" rx="3" fill="#2f2e41" stroke="url(#accentGrad)" stroke-width="2"/>
+    <rect x="95" y="88" width="6" height="12" rx="3" fill="url(#accentGrad)"/>
+    <line x1="85" y1="105" x2="110" y2="105" stroke="url(#accentGrad)" stroke-width="2"/>
+    
+    <!-- Legs -->
+    <rect x="25" y="140" width="12" height="60" rx="6" fill="#2f2e41"/>
+    <rect x="43" y="140" width="12" height="60" rx="6" fill="#2f2e41"/>
+    
+    <!-- Shoes -->
+    <ellipse cx="31" cy="200" rx="12" ry="6" fill="#2f2e41"/>
+    <ellipse cx="49" cy="200" rx="12" ry="6" fill="#2f2e41"/>
+  </g>
+  
+  <!-- Floating icons -->
+  <g opacity="0.4">
+    <!-- Star -->
+    <path d="M 650 350 L 655 365 L 670 367 L 660 377 L 663 392 L 650 385 L 637 392 L 640 377 L 630 367 L 645 365 Z" fill="url(#accentGrad)"/>
+    
+    <!-- Plus -->
+    <circle cx="120" cy="420" r="18" fill="white" stroke="url(#gradient2)" stroke-width="2"/>
+    <line x1="120" y1="410" x2="120" y2="430" stroke="url(#gradient2)" stroke-width="3"/>
+    <line x1="110" y1="420" x2="130" y2="420" stroke="url(#gradient2)" stroke-width="3"/>
+    
+    <!-- Chart icon -->
+    <rect x="600" y="450" width="12" height="30" rx="2" fill="url(#gradient2)" opacity="0.6"/>
+    <rect x="620" y="440" width="12" height="40" rx="2" fill="url(#gradient2)" opacity="0.6"/>
+    <rect x="640" y="430" width="12" height="50" rx="2" fill="url(#accentGrad)"/>
+  </g>
+  
+  <!-- Success metrics -->
+  <g transform="translate(550, 320)">
+    <circle cx="40" cy="40" r="35" fill="white" stroke="url(#accentGrad)" stroke-width="3"/>
+    <text x="40" y="50" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="url(#gradient2)" text-anchor="middle">12</text>
+    <text x="40" y="100" font-family="Arial, sans-serif" font-size="14" fill="#667eea" text-anchor="middle">Applications</text>
+  </g>
+</svg>
