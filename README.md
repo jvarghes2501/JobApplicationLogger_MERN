@@ -1,4 +1,4 @@
-# JobLogger App
+# JobLogger App - Link: https://jobapplicationlogger-mern.onrender.com/
 
 A full-stack MERN (MongoDB, Express, React, Node.js) application for tracking job applications. Keep track of your job search progress with detailed statistics, visualizations, and export capabilities.
 
