@@ -6,6 +6,7 @@ import {
   editJobById,
   deleteJobById,
   showStats,
+  downloadJobsAsExcel,
 } from "../controllers/jobController.js";
 
 import {
@@ -15,6 +16,7 @@ import {
 const router = Router();
 
 router.route("/stats").get(showStats);
+router.route("/download").get(downloadJobsAsExcel);
 router.route("/").get(getAllJobs).post(validateJobInput, createJob);
 
 router

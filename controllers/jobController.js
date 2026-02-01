@@ -2,6 +2,7 @@ import Job from "../models/JobModel.js";
 import { StatusCodes } from "http-status-codes";
 import mongoose from "mongoose";
 import dayjs from "dayjs";
+import ExcelJS from "exceljs";
 export const getAllJobs = async (req, res) => {
   const { search, jobStatus, jobType, sort } = req.query;
 
@@ -122,4 +123,55 @@ export const showStats = async (req, res) => {
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ msg: "Error fetching stats", error: error.message });
   }
+};
+
+export const downloadJobsAsExcel = async (req, res) => {
+  const jobs = await Job.find({ createdBy: req.user.userId }).sort(
+    "-createdDate"
+  );
+
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet("Jobs");
+
+  // Define columns
+  worksheet.columns = [
+    { header: "Company", key: "company", width: 20 },
+    { header: "Position", key: "title", width: 25 },
+    { header: "Status", key: "jobStatus", width: 15 },
+    { header: "Type", key: "jobType", width: 15 },
+    { header: "Location", key: "jobLocation", width: 20 },
+    { header: "Date Applied", key: "createdDate", width: 15 },
+  ];
+
+  // Add data
+  jobs.forEach((job) => {
+    worksheet.addRow({
+      company: job.company,
+      title: job.title,
+      jobStatus: job.jobStatus,
+      jobType: job.jobType,
+      jobLocation: job.jobLocation,
+      createdDate: dayjs(job.createdDate).format("MM/DD/YYYY"),
+    });
+  });
+
+  // Style header row
+  worksheet.getRow(1).font = { bold: true };
+  worksheet.getRow(1).fill = {
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFE0E0E0" },
+  };
+
+  res.setHeader(
+    "Content-Type",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  );
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename=jobs_${dayjs().format("YYYY-MM-DD")}.xlsx`
+  );
+
+  await workbook.xlsx.write(res);
+  res.end();
 };
