@@ -208,7 +208,7 @@ Download all your job data with one click, including:
 
 ## Deployment
 
-### Option 1: Render.com
+### Render.com
 
 1. Push code to GitHub
 2. Create new Web Service on Render
@@ -217,13 +217,6 @@ Download all your job data with one click, including:
 5. Set start command: `node server.js`
 6. Add environment variables
 
-### Option 2: Railway.app
-
-1. Push code to GitHub
-2. Create new project on Railway
-3. Connect GitHub repository
-4. Add environment variables
-5. Railway auto-deploys
 
 ### Database: MongoDB Atlas
 
